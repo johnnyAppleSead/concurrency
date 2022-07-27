@@ -28,6 +28,9 @@ public class Racer extends Thread{
 	}
 	public void runFast() throws InterruptedException{
 		while(Race.start) {
+			if(this.distanceRun >= Race.raceLength) {
+				return;
+			}
 			sleep(250);
 			SecureRandom random = new SecureRandom();
 			int movedForward = random.nextInt(50);
@@ -46,7 +49,7 @@ public class Racer extends Thread{
 					for(int position = 0; position < Race.finishers.size(); position++) {
 						Racer racer = Race.finishers.get(position);
 						System.out.println("Racer " + racer.getRacerName() + " has finished in position " + (position+1));
-						//racer.interrupt();
+						racer.interrupt();
 					}
 				}
 			}
